@@ -1,0 +1,7 @@
+all: Sinc1.exe Sinc2.exe
+
+CC=gcc
+
+Sinc1.exe: Sinc1.o
+
+Sinc2.exe: Sinc2.o
