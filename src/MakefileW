@@ -1,7 +1,18 @@
-all: Sinc1.exe Sinc2.exe
+.phony: all clean
+
+all: Sinc1 Sinc2 MostrarArchivo CatW ConectarDosProcesos
 
 CC=gcc
 
 Sinc1.exe: Sinc1.o
 
 Sinc2.exe: Sinc2.o
+
+MostrarArchivo: MostrarArchivo.o
+
+CatW: CatW.o
+
+ConectarDosProcesos: ConectarDosProcesos.o
+
+clean:
+	rm -f *.o *.c~ Sinc1 Sinc2 MostrarArchivo CatW ConectarDosProcesos

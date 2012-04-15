@@ -15,7 +15,7 @@ main(int argc, char *argv[]) {
   DWORD dwBytesRead, dwBytesWritten;
   BOOL  bTerminar;
 
-  hFile = CreateFile("MostrarArchivo.c"      // pszName
+  hFile = CreateFile(TEXT("MostrarArchivo.c")      // pszName
 		     , GENERIC_READ          // dwDesiredAccess 
 		     , FILE_SHARE_READ       // dwShareMode
 		     , NULL                  // psa
@@ -26,6 +26,13 @@ main(int argc, char *argv[]) {
 
   if (hFile == INVALID_HANDLE_VALUE) {
     fprintf(stderr, "Error abriendo: %ld\r\n", GetLastError());
+    ExitProcess((DWORD) 1);
+  }
+
+  hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+
+  if (hStdOutput == INVALID_HANDLE_VALUE) {
+    fprintf(stderr, "Error obteniendo descriptor: %ld\r\n", GetLastError());
     ExitProcess((DWORD) 1);
   }
 
@@ -48,7 +55,7 @@ main(int argc, char *argv[]) {
                    , &dwBytesWritten  // pdwNumBytes
                    , NULL             // pOverlapped
                    )) {
-      fprintf(stderr, "Error escribiendo: %ld \r\n", GetLastError());
+      fprintf(stderr, "MostrarArchivo - Error escribiendo: %ld \r\n", GetLastError());
       ExitProcess((DWORD) 3);
     }
   }

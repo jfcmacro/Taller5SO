@@ -36,7 +36,7 @@ main(int argc, char *argv[]) {
                    , dwBytesRead     // pdwNumBytes
                    , &dwBytesWritten // pdwNumBytes
                    , NULL)) {
-      fprintf(stderr, "Error escribiendo: %ld\r\n", GetLastError());
+      fprintf(stderr, "CatW - Error escribiendo: %ld\r\n", GetLastError());
       ExitProcess((DWORD) 1);
     }
   }
