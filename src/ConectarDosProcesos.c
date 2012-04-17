@@ -25,10 +25,10 @@ main(int argc, char *argv[]) {
     ExitProcess((DWORD) 1); 
   }
 
-  // Inicializando las estructuras de la informaci¢n de los procesos
+  // Inicializando las estructuras de la informaciï¿½n de los procesos
   ZeroMemory(&piProcInfoP1, sizeof(PROCESS_INFORMATION));
 
-  // Inicializando la informaci¢n que cada proceso necesita
+  // Inicializando la informaciï¿½n que cada proceso necesita
   ZeroMemory(&startupInfo, sizeof(STARTUPINFO));
   startupInfo.cb = sizeof(STARTUPINFO);
   startupInfo.hStdInput  = GetStdHandle(STD_INPUT_HANDLE);
@@ -43,10 +43,10 @@ main(int argc, char *argv[]) {
     ExitProcess((DWORD) 2);
   }
 
-  // Inicializando las estructuras de la informaci¢n de los procesos
+  // Inicializando las estructuras de la informaciï¿½n de los procesos
   ZeroMemory(&piProcInfoP2, sizeof(PROCESS_INFORMATION));
 
-  // Inicializando la informaci¢n que cada proceso necesita
+  // Inicializando la informaciï¿½n que cada proceso necesita
   ZeroMemory(&startupInfo, sizeof(STARTUPINFO));
   startupInfo.cb = sizeof(STARTUPINFO);
   startupInfo.hStdInput  = hReadPipe;
@@ -63,8 +63,13 @@ main(int argc, char *argv[]) {
   }
 
   
-  WaitForSingleObject(piProcInfoP1.hProcess, 0);
-  WaitForSingleObject(piProcInfoP2.hProcess, 0);
+  WaitForSingleObject(piProcInfoP1.hProcess, INFINITE);
+  WaitForSingleObject(piProcInfoP2.hProcess, INFINITE);
+  
+  CloseHandle(piProcInfoP1.hProcess);
+  CloseHandle(piProcInfoP1.hThread);
+  CloseHandle(piProcInfoP2.hProcess);
+  CloseHandle(piProcInfoP2.hThread);
   ExitProcess((DWORD) 0);
 }
 
